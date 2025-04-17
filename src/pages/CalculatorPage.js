@@ -1,5 +1,5 @@
 import React from 'react';
-import EnhancedCalculator from '../components/Calculator/EnhancedCalculator';
+import EnhancedDashboard from '../components/Calculator/EnhancedDashboard';
 import CTABanner from '../components/Home/CTABanner';
 
 const CalculatorPage = () => {
@@ -8,18 +8,18 @@ const CalculatorPage = () => {
       <section className="section">
         <div className="container" style={{ maxWidth: '1200px' }}>
           <div className="text-center" style={{ marginBottom: '3rem' }}>
-            <h1>Interactive Financial Calculator</h1>
+            <h1>Interactive Financial Dashboard</h1>
             <p style={{ 
               fontSize: '1.125rem', 
               color: 'var(--text-light)',
               maxWidth: '700px',
               margin: '1rem auto 0'
             }}>
-              Experience the power of our premium financial analysis tools with this interactive demo
+              Experience the power of our premium financial analysis tools with this interactive dashboard
             </p>
           </div>
           
-          <EnhancedCalculator />
+          <EnhancedDashboard />
         </div>
       </section>
       
