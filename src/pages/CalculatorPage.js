@@ -1,11 +1,28 @@
 import React from 'react';
-import Calculator from '../components/Calculator/Calculator';
+import EnhancedCalculator from '../components/Calculator/EnhancedCalculator';
 import CTABanner from '../components/Home/CTABanner';
 
 const CalculatorPage = () => {
   return (
     <div style={{ paddingTop: '5rem' }}>
-      <Calculator />
+      <section className="section">
+        <div className="container" style={{ maxWidth: '1200px' }}>
+          <div className="text-center" style={{ marginBottom: '3rem' }}>
+            <h1>Interactive Financial Calculator</h1>
+            <p style={{ 
+              fontSize: '1.125rem', 
+              color: 'var(--text-light)',
+              maxWidth: '700px',
+              margin: '1rem auto 0'
+            }}>
+              Experience the power of our premium financial analysis tools with this interactive demo
+            </p>
+          </div>
+          
+          <EnhancedCalculator />
+        </div>
+      </section>
+      
       <CTABanner />
     </div>
   );
