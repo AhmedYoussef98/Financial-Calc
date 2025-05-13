@@ -1,5 +1,6 @@
 import React from 'react';
 import EnhancedDashboard from '../components/Calculator/EnhancedDashboard';
+import FreemiumCTA from '../components/Calculator/FreemiumCTA'; // Add this import
 import CTABanner from '../components/Home/CTABanner';
 
 const CalculatorPage = () => {
@@ -20,6 +21,7 @@ const CalculatorPage = () => {
           </div>
           
           <EnhancedDashboard />
+          <FreemiumCTA /> {/* Add this component */}
         </div>
       </section>
       

@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-const PricingCard = ({ plan, isRecommended }) => {
+const PricingCard = ({ plan, isRecommended, billingCycle = 'monthly' }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -58,28 +60,71 @@ const PricingCard = ({ plan, isRecommended }) => {
           }}>
             {plan.price}
           </span>
+          {plan.price !== 'Custom' && (
+            <span style={{ 
+              color: 'var(--text-light)',
+              fontSize: '0.875rem',
+              marginLeft: '0.25rem',
+              verticalAlign: 'bottom'
+            }}>
+              /{billingCycle === 'monthly' ? 'mo' : 'year'}
+            </span>
+          )}
         </div>
         <p style={{ color: 'var(--text-light)', marginBottom: '1.5rem' }}>{plan.description}</p>
         
-        <ul style={{ 
-          listStyle: 'none',
-          padding: 0,
-          margin: '0 0 2rem'
-        }}>
-          {plan.features.map((feature, i) => (
-            <li key={i} style={{ 
-              marginBottom: '0.75rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem'
-            }}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20 6L9 17L4 12" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              {feature}
-            </li>
-          ))}
-        </ul>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <h4 style={{ fontSize: '0.875rem', textTransform: 'uppercase', color: 'var(--text-light)', marginBottom: '0.75rem', letterSpacing: '0.05em' }}>
+            What's included:
+          </h4>
+          <ul style={{ 
+            listStyle: 'none',
+            padding: 0,
+            margin: '0 0 2rem'
+          }}>
+            {plan.features.map((feature, i) => (
+              <li key={i} style={{ 
+                marginBottom: '0.75rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem'
+              }}>
+                <span style={{ color: 'var(--primary)', fontSize: '0.875rem', flexShrink: 0 }}>
+                  <FontAwesomeIcon icon={faCheck} />
+                </span>
+                <span style={{ fontSize: '0.875rem' }}>{feature}</span>
+              </li>
+            ))}
+          </ul>
+          
+          {plan.limitations && plan.limitations.length > 0 && (
+            <>
+              <h4 style={{ fontSize: '0.875rem', textTransform: 'uppercase', color: 'var(--text-light)', marginBottom: '0.75rem', letterSpacing: '0.05em' }}>
+                Not included:
+              </h4>
+              <ul style={{ 
+                listStyle: 'none',
+                padding: 0,
+                margin: '0 0 2rem'
+              }}>
+                {plan.limitations.map((limitation, i) => (
+                  <li key={i} style={{ 
+                    marginBottom: '0.75rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    color: 'var(--text-light)'
+                  }}>
+                    <span style={{ color: 'var(--text-light)', fontSize: '0.875rem', flexShrink: 0 }}>
+                      <FontAwesomeIcon icon={faTimes} />
+                    </span>
+                    <span style={{ fontSize: '0.875rem' }}>{limitation}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
       </div>
       
       <div style={{ padding: '0 2rem 2rem' }}>
@@ -87,9 +132,14 @@ const PricingCard = ({ plan, isRecommended }) => {
           <button className={isRecommended ? 'btn btn-primary' : 'btn btn-secondary'} style={{ 
             width: '100%'
           }}>
-            Get Started
+            {plan.callToAction || 'Get Started'}
           </button>
         </Link>
+        {plan.price !== 'Custom' && (
+          <p style={{ fontSize: '0.75rem', color: 'var(--text-light)', textAlign: 'center', marginTop: '0.75rem' }}>
+            No credit card required
+          </p>
+        )}
       </div>
     </motion.div>
   );
